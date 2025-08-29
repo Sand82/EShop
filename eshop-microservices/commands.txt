@@ -1,0 +1,26 @@
+- Run Postgres terminal commands:
+
+# Get docker container id
+docker ps
+
+# Opens an interactive Bash shell inside a running container
+docker exec -it CONTAINER ID bash
+
+# Run Postgres interactive terminal
+psql -U postgres
+
+# List databases
+\l
+
+# Connected to the database
+\c CatalogDb
+
+# To see created tables
+\d
+
+#Check records to the database
+SELECT * FROM DB Name;
+
+#Link for download PGAdmin4
+
+https://www.pgadmin.org/
