@@ -1,24 +1,23 @@
-﻿namespace Catalog.API.Products.GetProducts
+﻿namespace Catalog.API.Products.GetProducts;
+
+public record GetProductsResponse(IEnumerable<Product> Products);
+
+public class GetProductsEndpoint : ICarterModule
 {
-    public record GetProductsResponce(IEnumerable<Product> Products);
-
-    public class GetProductsEndpoint : ICarterModule
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        app.MapGet("/products", async (ISender sender) =>
         {
-            app.MapGet("/products", async (ISender sender) =>
-            {
-                var result = await sender.Send(new GetProductsQuery());
+            var result = await sender.Send(new GetProductsQuery());
 
-                var responce = result.Adapt<GetProductsResponce>();
+            var response = result.Adapt<GetProductsResponse>();
 
-                return Results.Ok(responce);
-            })
-            .WithName("GetProducts")
-            .Produces<GetProductsResponce>(StatusCodes.Status201Created)
-            .ProducesProblem(StatusCodes.Status400BadRequest)
-            .WithSummary("Get Products")
-            .WithDescription("Get Products"); 
-        }
+            return Results.Ok(response);
+        })
+        .WithName("GetProducts")
+        .Produces<GetProductsResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("Get Products")
+        .WithDescription("Get Products"); 
     }
 }
