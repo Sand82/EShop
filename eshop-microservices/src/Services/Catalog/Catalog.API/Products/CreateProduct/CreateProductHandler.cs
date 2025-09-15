@@ -13,7 +13,7 @@ internal class CreateProductCommandHandler(IDocumentSession session)
         { 
             Name = command.Name,
             Category = command.Category,
-            Descrption = command.Description,
+            Description = command.Description,
             ImageFile = command.ImageFile,
             Price = command.Price,
         };
