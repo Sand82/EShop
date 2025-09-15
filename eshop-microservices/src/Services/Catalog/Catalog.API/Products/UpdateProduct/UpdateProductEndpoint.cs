@@ -12,14 +12,14 @@ public class UpdateProductEndpoint : ICarterModule
         {
             var command = request.Adapt<UpdateProductCommand>();
 
-            var result = sender.Send(command);
+            var result = await sender.Send(command);
 
             var response = result.Adapt<UpdateProductResponse>();
 
             return Results.Ok(response);
         })
         .WithName("UpdateProduct")
-        .Produces<UpdateProductResponse>(StatusCodes.Status201Created)
+        .Produces<UpdateProductResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Update Product")
