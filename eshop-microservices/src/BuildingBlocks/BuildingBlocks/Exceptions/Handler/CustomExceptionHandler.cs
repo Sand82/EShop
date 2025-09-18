@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace BuildingBlocks.Exceptions.Handler;
 
@@ -62,7 +63,7 @@ public class CustomExceptionHandler
 
         if (exception is ValidationException validationException)
         {
-            problemDetails.Extensions.Add("ValidationErrors", validationException.Value);
+            problemDetails.Extensions.Add("ValidationErrors", validationException.Errors);
         }
 
         await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
