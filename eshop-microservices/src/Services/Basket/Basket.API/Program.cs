@@ -1,5 +1,3 @@
-using BuildingBlocks.Exceptions.Handler;
-
 var builder = WebApplication.CreateBuilder(args);
 
 //Add services to container.
