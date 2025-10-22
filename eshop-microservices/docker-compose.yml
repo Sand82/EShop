@@ -4,7 +4,9 @@ services:
   catalogdb:
     image: postgres 
   basketdb:
-    image: postgres     
+    image: postgres
+  destributedcache:
+    image: redis
 
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
