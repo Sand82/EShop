@@ -45,15 +45,39 @@ public class DiscountService(DiscountContext dbContext, ILogger<DiscountService>
         return couponModel;
     }
 
-    public override Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
+    public async override Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
     {
-        ;
-        return base.UpdateDiscount(request, context);
+        var coupon = request.Coupon.Adapt<Coupon>();
+
+        if (coupon is null)
+        {
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object."));
+        }
+
+        dbContext.Coupons.Update(coupon);
+        await dbContext.SaveChangesAsync();
+
+        logger.LogInformation("Discount is successfully updated. ProductName : {ProductName}, Amount : {Amount}."
+            , coupon.ProductName, coupon.Amount);
+
+        var couponModel = coupon.Adapt<CouponModel>();
+        return couponModel;
     }
 
-    public override Task<DeleteDiscountResponce> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
+    public override async Task<DeleteDiscountResponce> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
     {
-        ;
-        return base.DeleteDiscount(request, context);
+        var coupon = await dbContext.Coupons.FirstOrDefaultAsync(x => x.ProductName == request.ProductName);
+
+        if (coupon is null)
+        {
+            throw new RpcException(new Status(StatusCode.NotFound, $"Discount with ProductName=${request.ProductName} is nt found."));
+        }
+
+        dbContext.Coupons.Remove(coupon);
+        await dbContext.SaveChangesAsync();
+
+        logger.LogInformation("Discount is successfully deleted: {ProductName}", request.ProductName);
+
+        return new DeleteDiscountResponce { Success = true };
     }
 }
