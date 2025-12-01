@@ -1,4 +1,5 @@
 ﻿namespace Ordering.Domain.ValueObjects;
+
 public record CustomerId
 {   
     private CustomerId(Guid guid)
