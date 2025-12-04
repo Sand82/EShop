@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ordering.Domain.Enums;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObjects;
+﻿using Ordering.Domain.Enums;
 
 namespace Ordering.Infrastructure.Data.Configurations
 {
@@ -109,7 +105,7 @@ namespace Ordering.Infrastructure.Data.Configurations
                     paymentBuilder.Property(p => p.CVV)
                         .HasMaxLength(3);
 
-                    paymentBuilder.Property(p => p.PaymentMethod);                        .
+                    paymentBuilder.Property(p => p.PaymentMethod);                        
 
                 });
 

@@ -10,6 +10,11 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Database");
 
+        services.AddDbContext<ApplicationDBContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+        });
+
         return services;
     }
 }
