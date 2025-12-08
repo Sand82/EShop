@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualBasic;
-using Ordering.Infrastructure.Data;
-
-namespace Ordering.Infrastructure.Extensions;
+﻿namespace Ordering.Infrastructure.Extensions;
 
 public static class DatabaseExtensions
 {
@@ -21,6 +16,9 @@ public static class DatabaseExtensions
     private static async Task SeedAsync(ApplicationDBContext context)
     {
        await SeedCustomersAsync(context);
+       await SeedProductAsync(context);
+       await SeedOrderAndItemsAsync(context);
+
     }
 
     private async static Task SeedCustomersAsync(ApplicationDBContext context)
@@ -29,9 +27,24 @@ public static class DatabaseExtensions
         {
             await context.Customers.AddRangeAsync(InitialData.Customers());
             await context.SaveChangesAsync();
+        }       
+    }
 
+    private async static Task SeedProductAsync(ApplicationDBContext context)
+    {
+        if (!await context.Products.AnyAsync())
+        {
+            await context.Products.AddRangeAsync(InitialData.Products());
+            await context.SaveChangesAsync();
         }
+    }
 
-        throw new NotImplementedException();
+    private async static Task SeedOrderAndItemsAsync(ApplicationDBContext context)
+    {
+        if (!await context.Orders.AnyAsync())
+        {
+            await context.Orders.AddRangeAsync(InitialData.OrdersWhitItems);
+            await context.SaveChangesAsync();
+        }
     }
 }
