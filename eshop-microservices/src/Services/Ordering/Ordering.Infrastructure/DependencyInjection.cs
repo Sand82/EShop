@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Ordering.Application.Data;
 using Ordering.Infrastructure.Infrastructure;
 
 namespace Ordering.Infrastructure;
@@ -18,6 +19,8 @@ public static class DependencyInjection
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());            
             options.UseSqlServer(connectionString);
         });
+
+        services.AddScoped<IApplicationDbContext, ApplicationDBContext>();
 
         return services;
     }
