@@ -16,4 +16,3 @@ public class GetOrdersByCustomerHandler(IApplicationDbContext dbContext) : IQuer
         return new GetOrdersByCustomerResult(orders.ToOrderDtoList());
     }
 }
-
