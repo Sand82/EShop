@@ -16,8 +16,8 @@ public class GetOrderByName : ICarterModule
 
             return Results.Ok(response);
         })
-         .WithName("GetOrderByName")
-        .Produces<GetOrdersByNameResponse>(StatusCodes.Status201Created)
+        .WithName("GetOrderByName")
+        .Produces<GetOrdersByNameResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Order By Name")
