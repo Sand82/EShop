@@ -25,7 +25,7 @@ public class LoggingBehavior<TRequest, TResponse>
 
         var timerTaken = timer.Elapsed;
 
-        if (timerTaken.Seconds > 3)
+        if (timerTaken.Seconds > 20)
         {
             logger.LogWarning("[PERFORMANCE] The request {Request} took {TimeTaken}",
                  typeof(TRequest).Name, timerTaken.Seconds);
