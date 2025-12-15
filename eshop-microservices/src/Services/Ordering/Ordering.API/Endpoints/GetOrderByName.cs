@@ -10,7 +10,7 @@ public class GetOrderByName : ICarterModule
     {
         app.MapGet("/orders/{orderName}", async (string orderName, ISender sender) =>
         {
-            var result = sender.Send(new GetOrdersByNameQuery(orderName));
+            var result = await sender.Send(new GetOrdersByNameQuery(orderName));
 
             var response = result.Adapt<GetOrdersByNameResponse>();
 
