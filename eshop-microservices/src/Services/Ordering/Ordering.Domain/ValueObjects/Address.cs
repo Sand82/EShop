@@ -2,13 +2,13 @@
 
 public record Address
 {
-    protected Address()
+    public Address()
     {        
     }
 
     private Address(string firstName, string lastName, string emailAddress, string addressLine, string country, string state, string zipCode)
     {
-        FirsName = firstName;
+        FirstName = firstName;
         LastName = lastName;
         EmailAddress = emailAddress;
         AddressLine = addressLine;
@@ -17,7 +17,7 @@ public record Address
         ZipCode = zipCode;
     }
 
-    public string FirsName { get; } = default!;
+    public string FirstName { get; } = default!;
     public string LastName { get; } = default!;
     public string? EmailAddress { get; } = default!;
     public string AddressLine { get; } = default!;
