@@ -13,13 +13,11 @@ public class BasketCheckoutEventHandler
         logger.LogInformation("Integration Event handler: {IntegrationEvent}", context.Message.GetType().Name);
 
         var command = MapToCreateOrderCommand(context.Message);
-
         await sender.Send(command);
     }
 
     private CreateOrderCommand MapToCreateOrderCommand(BaskedCheckoutEvent message)
     {
-
         var addressDto = new AddressDto(message.FirstName, message.LastName, message.EmailAddress, message.AddressLine, message.Country, message.State, message.ZipCode);
         var paymentDto = new PaymentDto(message.CardName, message.CardNumber, message.Expiration, message.CVV, message.PaymentMethod);
         var orderId = Guid.NewGuid();
