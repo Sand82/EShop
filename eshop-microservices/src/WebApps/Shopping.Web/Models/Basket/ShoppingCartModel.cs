@@ -16,7 +16,7 @@ public class ShoppingCartItemModel
     public string ProductName { get; set; } = default!;
 }
 
-public record GetBasketResponse(ShoppingCartModel Card);
-public record StoreBasketRequest(ShoppingCartModel Card);
+public record GetBasketResponse(ShoppingCartModel Cart);
+public record StoreBasketRequest(ShoppingCartModel Cart);
 public record StoreBasketResponse(string UserName);
 public record DeleteBasketResponse(bool IsSuccess);
