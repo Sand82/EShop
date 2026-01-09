@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Shopping.Web.Services;
-
-namespace Shopping.Web.Pages
+﻿namespace Shopping.Web.Pages
 {
     public class ProductListModel(ICatalogService catalogService, IBasketService basketService, ILogger<ProductListModel> logger)
         : PageModel
@@ -12,7 +9,7 @@ namespace Shopping.Web.Pages
         [BindProperty(SupportsGet = true)]
         public string SelectedCategory { get; set; } = default!;
 
-        public async Task<IActionResult> GetTaskAsync(string categoryName)
+        public async Task<IActionResult> OnGetAsync(string categoryName)
         {
             var response = await catalogService.GetProducts();
 
