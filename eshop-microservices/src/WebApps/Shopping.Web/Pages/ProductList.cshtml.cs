@@ -3,7 +3,7 @@ using Shopping.Web.Services;
 
 namespace Shopping.Web.Pages
 {
-    public class ProductListModel(ICatalogService catalogService, IBasketService basketService, ILogger<IndexModel> logger)
+    public class ProductListModel(ICatalogService catalogService, IBasketService basketService, ILogger<ProductListModel> logger)
         : PageModel
     {
         public IEnumerable<string> CategoryList { get; set; } = [];
@@ -42,8 +42,8 @@ namespace Shopping.Web.Pages
             basket.Items.Add(new ShoppingCartItemModel
             {
                 ProductId = productId,
-                ProductName = productResponse.Products.Name,
-                Price = productResponse.Products.Price,
+                ProductName = productResponse.Product.Name,
+                Price = productResponse.Product.Price,
                 Quantity = 1,
                 Color = "Black"
             });
